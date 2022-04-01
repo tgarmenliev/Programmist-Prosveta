@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.grid-container {
+  display: inline-grid;
+  grid-row-gap: 0px;
+  grid-column-gap: 0px;
+  grid-template-columns: auto auto auto auto auto auto;
+  grid-template-rows: auto auto auto auto auto auto;
+  background-color: #778899;
+  padding: 0px;
+  margin-left:15px;
+}
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 45px 45px;
+  font-size: 30px;
+  text-align: center;
+}
+.onstate {
+  background-color: #38B000;
+}
+.makewhite {
+  background-color: #F1FAEE;
+}
+.grid-item1 {
+  background-color: #70E000;
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 45px 45px;
+  font-size: 10px;
+  text-align: center;
+}
+</style>
+<style>
+.button {
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.button1 {
+  background-color: white;
+  color: black;
+  border: 2px solid #1D3557;
+}
+
+.button1:hover {
+  background-color: #1D3557;
+  color: white;
+}
+
+.button2 {
+  background-color: white;
+  color: black;
+  border: 2px solid #1D3557;
+}
+
+.button2:hover {
+  background-color: #A8DADC;
+  color: white;
+}
+
+</style>
+<style>
+.center {
+  margin: auto;
+  width: 100%;
+  padding: 10px;
+}
+</style>
+<style>
+.center1 {
+  margin: auto;
+  width: 60%;
+  border: 3px solid #483D8B;
+  padding: 10px;
+}
+.speech-bubble {
+  position: center;
+  margin: .5em auto;
+  padding: 1em;
+  width: 5em; height: 2em;
+  border-radius: .25em;
+  transform: rotate(-4deg) rotateY(15deg);
+  background: #629bdd;
+  font: 1.7em Century Gothic, Verdana, sans-serif;
+  text-align: left;
+}
+.speech-bubble:before, .speech-bubble:after {
+  position: absolute;
+  z-index: -1;
+  content: '';
+}
+.speech-bubble:after {
+  top: 0; right: 0; bottom: 0; left: 0;
+  border-radius: inherit;
+  transform: rotate(2deg) translate(.35em, -.15em) scale(1.02);
+  background: #FFFCF7;
+}
+.speech-bubble:before {
+  border: solid 0 transparent;
+  border-right: solid 3.5em #f4fbfe;
+  border-bottom: solid .25em #629bdd;
+  bottom: .25em; left: 1.25em;
+  width: 0; height: 1em;
+  transform: rotate(45deg) skewX(75deg);
+}
+</style>
+<style>
+.center2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.text_box{
+  text-align:center;
+}
+.text_box > input{
+  text-align:center;
+}
+</style>
+</head>
+<body style="background-color:#F1FAEE;">
+
+
+
+
+
+
+<!-- Разработка на Тихомир Гърменлиев -->
+
+
+
+
+
+
+
+<div class="center1">
+<h1 style="font-size:50px;text-align:center;color:#457B9D">Умножавай вярно и открий пътя към увеселителния парк. <br>Игра по математика за 2 клас.</h1>
+</div>
+
+<script>
+function start_igra()
+{
+  var a = document.getElementById("start_game");
+  var b = document.getElementById("start_nadpis");
+  var c = document.getElementById("myDIV");
+  var d = document.getElementById("check");
+  var e = document.getElementById("button_check");
+  a.style.display='none';
+  b.style.display='none';
+  c.style.display='block';
+  d.style.display='block';
+  e.style.display='block';
+}
+</script>
+
+<h2 id="start_nadpis" style="text-align:center;color:#1D3557"><strong>Реши вярно всички задачи и преведи Туити по пътя до света на забавленията, който го очаква от другата страна.</strong><br></h2>
+
+<div class="center2">
+  <button class="button button2" onclick="start_igra()" id="start_game">Да започваме!</button>
+</div>
+<br>
+
+<div id="myDIV" class="center2" style="font-size:30px;text-align:center;display: none;"><strong>5 . 3 = </strong></div>
+
+<script>
+const handleCellClick = (e) => {
+  if (e.target.classList.contains('grid-item')) {
+    e.target.classList.toggle('onstate');
+  }
+}
+
+document.querySelector('.grid-container')
+  .addEventListener('click', handleCellClick);
+</script>
+
+<div align='center'>
+<input class="numinput" id="check" style="display: none;background-color:#F1FAEE;font-size:25px" type="number"/>
+</div>
+
+<script>
+function myFunction() {
+  var x = document.getElementById("myDIV");
+  var y = document.getElementById("nadpis_pile");
+  var z = document.getElementById("check");
+  var p = document.getElementById("button_check");
+  var q = document.getElementById("refresh_page");
+  var r = document.getElementById("krai_refresh");
+  if (x.innerHTML === "<strong>5 . 3 = </strong>") {
+    var check1=document.getElementById("check").value == "15";
+    if (check1){
+      x.innerHTML = "<strong>7 . 6 = </strong>";
+      y.innerHTML = "Браво!";
+      document.getElementById('check').value = '';
+      document.querySelectorAll(".grid-item, .onstate").forEach((el, index) => {
+        if (index == 0){
+          el.classList.add('onstate');
+        }
+      })
+    }
+    if(!check1){
+      y.innerHTML = "Помисли и опитай отново!";
+      document.getElementById('check').value = '';
+    }
+  } 
+  else if(x.innerHTML === "<strong>7 . 6 = </strong>"){
+    var check1=document.getElementById("check").value == "42";
+    if (check1){
+      x.innerHTML = "<strong>9 . 9 = </strong>";
+      y.innerHTML = "Отлично!";
+      document.getElementById('check').value = '';
+      document.querySelectorAll(".onstate, .grid-item").forEach((el, index) => {
+        if (index == 1) el.classList.add('onstate');
+      })
+    }
+    if(!check1){
+      y.innerHTML = "Помисли и опитай отново!";
+      document.getElementById('check').value = '';
+    }
+  }
+  else if(x.innerHTML === "<strong>9 . 9 = </strong>"){
+    var check1=document.getElementById("check").value == "81";
+    if (check1){
+      x.innerHTML = "<strong>8 . 3 = </strong>";
+      y.innerHTML = "Много добре!";
+      document.getElementById('check').value = '';
+      document.querySelectorAll('.grid-item').forEach((el, index) => {
+        if (index == 7) el.classList.add('onstate');
+      })
+    }
+    if(!check1){
+      y.innerHTML = "Помисли и опитай отново!";
+      document.getElementById('check').value = '';
+    }
+  }
+  else if(x.innerHTML === "<strong>8 . 3 = </strong>"){
+    var check1=document.getElementById("check").value == "24";
+    if (check1){
+      x.innerHTML = "<strong>3 . 6 = </strong>";
+      y.innerHTML = "Страхотно!";
+      document.getElementById('check').value = '';
+      document.querySelectorAll('.grid-item').forEach((el, index) => {
+        if (index == 13) el.classList.add('onstate');
+      })
+    }
+    if(!check1){
+      y.innerHTML = "Помисли и опитай отново!";
+      document.getElementById('check').value = '';
+    }
+  }
+  else if(x.innerHTML === "<strong>3 . 6 = </strong>"){
+    var check1=document.getElementById("check").value == "18";
+    if (check1){
+      x.innerHTML = "<strong>7 . 8 = </strong>";
+      y.innerHTML = "Уникално!";
+      document.getElementById('check').value = '';
+      document.querySelectorAll('.grid-item').forEach((el, index) => {
+        if (index == 14) el.classList.add('onstate');
+      })
+    }
+    if(!check1){
+      y.innerHTML = "Помисли и опитай отново!";
+      document.getElementById('check').value = '';
+    }
+  }
+  else if(x.innerHTML === "<strong>7 . 8 = </strong>"){
+    var check1=document.getElementById("check").value == "56";
+    if (check1){
+      x.innerHTML = "<strong>8 . 6 = </strong>";
+      y.innerHTML = "Супер!";
+      document.getElementById('check').value = '';
+      document.querySelectorAll('.grid-item').forEach((el, index) => {
+        if (index == 15) el.classList.add('onstate');
+      })
+    }
+    if(!check1){
+      y.innerHTML = "Помисли и опитай отново!";
+      document.getElementById('check').value = '';
+    }
+  }
+  else if(x.innerHTML === "<strong>8 . 6 = </strong>"){
+    var check1=document.getElementById("check").value == "48";
+    if (check1){
+      x.innerHTML = "<strong>7 . 7 = </strong>";
+      y.innerHTML = "Удивително!";
+      document.getElementById('check').value = '';
+      document.querySelectorAll('.grid-item').forEach((el, index) => {
+        if (index == 21) el.classList.add('onstate');
+      })
+    }
+    if(!check1){
+      y.innerHTML = "Помисли и опитай отново!";
+      document.getElementById('check').value = '';
+    }
+  }
+  else if(x.innerHTML === "<strong>7 . 7 = </strong>"){
+    var check1=document.getElementById("check").value == "49";
+    if (check1){
+      x.innerHTML = "<strong>9 . 8 = </strong>";
+      y.innerHTML = "Прекрасно!";
+      document.getElementById('check').value = '';
+      document.querySelectorAll('.grid-item').forEach((el, index) => {
+        if (index == 27) el.classList.add('onstate');
+      })
+    }
+    if(!check1){
+      y.innerHTML = "Помисли и опитай отново!";
+      document.getElementById('check').value = '';
+    }
+  }
+  else if(x.innerHTML === "<strong>9 . 8 = </strong>"){
+    var check1=document.getElementById("check").value == "72";
+    if (check1){
+      x.innerHTML = "<strong>3 . 9 = </strong>";
+      y.innerHTML = "Чудесно!";
+      document.getElementById('check').value = '';
+      document.querySelectorAll('.grid-item').forEach((el, index) => {
+        if (index == 28) el.classList.add('onstate');
+      })
+    }
+    if(!check1){
+      y.innerHTML = "Помисли и опитай отново!";
+      document.getElementById('check').value = '';
+    }
+  }
+  else if(x.innerHTML === "<strong>3 . 9 = </strong>"){
+    var check1=document.getElementById("check").value == "27";
+    if (check1){
+      y.innerHTML = "Ти успя! Браво!";
+      document.getElementById('check').value = '';
+      document.getElementById('myDIV') .style.display='none';
+      document.querySelectorAll('.grid-item').forEach((el, index) => {
+        if (index == 0) el.classList.add('onstate');
+        else if (index == 1) el.classList.add('onstate');
+        else if (index == 7) el.classList.add('onstate');
+        else if (index == 13) el.classList.add('onstate');
+        else if (index == 14) el.classList.add('onstate');
+        else if (index == 15) el.classList.add('onstate');
+        else if (index == 21) el.classList.add('onstate');
+        else if (index == 27) el.classList.add('onstate');
+        else if (index == 28) el.classList.add('onstate');
+        else if (index == 29) el.classList.add('onstate');
+        else el.classList.add('makewhite');
+      })
+      z.style.display='none';
+      p.style.display='none';
+      q.style.display='block';
+      r.style.display='block';
+      <!-- premesti Tweety-->
+    }
+    if(!check1){
+      y.innerHTML = "Помисли и опитай отново!";
+      document.getElementById('check').value = '';
+    }
+  }
+}
+
+function refreshPage(){
+  window.location.reload();
+} 
+</script>
+
+<div class="center2">
+<p><button onclick="myFunction()" class="button button2" style="display: none;" id="button_check">Провери</button></p>
+<p id="krai_refresh" style="display: none;color:#184E77;font-size:35px;">Ако искаш да се пробваш отново натисни бутона отдолу:</p>
+</div>
+<div class="center2">
+<p><button type="submit" class="button button2" id="refresh_page" style="display: none;" onClick="refreshPage()">Искам отново да се пробвам.</button></p>
+</div>
+<br>
+
+<!--
+<h3 id="demo" onclick="myFunction()">Click me to change my color.</h3>
+
+<script>
+function myFunction() {
+  document.getElementById("demo").style.color = "red";
+}
+</script>
+
+<script>
+var randkey=0;
+function fn(){
+  var Name = document.getElementById('name').value;
+  randKey = Math.floor(Math.random()*999);
+  document.getElementById('result').innerHTML +=  '<div id='+randKey+'>' + Name +'<br><button onclick=cleardd('+randKey+')>clear</button></div>';
+  
+}
+function cleardd(randKey){
+  document.getElementById(randKey).remove();
+}
+</script>
+
+<input type="text" id="name" placeholder="enter">
+<br>
+<button id="btn" onclick="fn()">click</button>
+<div id="result">
+</div>
+-->
+
+<div id="wrapperDiv" class="center">
+<div class='speech-bubble' id="nadpis_pile" style="float:left;margin:18px;">Хайде да започваме!</div>
+<div style="padding:0px;float:left">
+<img src="https://i.pinimg.com/originals/ce/5f/53/ce5f53437e291c48705428721406985c.jpg" alt="tweety" width="80" height="150">
+</div>
+
+<div id="div2" style="padding:0px;float:left">
+<div class="grid-container" id="grid">
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>  
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>  
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>  
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>  
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>  
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>  
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>  
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>  
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>  
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+</div>
+</div>
+<div>
+<img src="https://i.pinimg.com/736x/17/ca/a2/17caa2340763bf11f47c8cd11bb9101f.jpg" alt="park" width="430" height="270" style="padding:20px;float:left;">
+</div>
+</div>
+<br><br><br>
+
+</body>
+</html>
